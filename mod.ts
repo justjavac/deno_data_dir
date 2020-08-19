@@ -1,15 +1,34 @@
-/**
- * Every exported symbol ideally should have a documentation line.
+/** Returns the path to the user's data directory.
  *
- * It is important that documentation is easily human readable,
- * but there is also a need to provide additional styling information to ensure
- * generated documentation is more rich text.
- * Therefore JSDoc should generally follow markdown markup to enrich the text.
- *
- * follow https://deno.land/std/style_guide.md
- *
- * @param foo - Description of non obvious parameter
+ * The returned value depends on the operating system and is either a string,
+ * containing a value from the following table, or `null`.
+ * 
+ * |Platform | Value                                    | Example                                      |
+ * | ------- | ---------------------------------------- | -------------------------------------------- |
+ * | Linux   | `$XDG_DATA_HOME` or `$HOME`/.local/share | /home/justjavac/.local/share                 |
+ * | macOS   | `$HOME`/Library/Application Support      | /Users/justjavac/Library/Application Support |
+ * | Windows | `{FOLDERID_RoamingAppData}`              | C:\Users\justjavac\AppData\Roaming           |
  */
-export default function starter(foo: string): string {
-  return foo;
+export default function dataDir(): string | null {
+  switch (Deno.build.os) {
+    case "linux": {
+      const xdg = Deno.env.get("XDG_DATA_HOME");
+      if (xdg) return xdg;
+
+      const home = Deno.env.get("HOME");
+      if (home) return `${home}/.local/share`;
+      break;
+    }
+
+    case "darwin": {
+      const home = Deno.env.get("HOME");
+      if (home) return `${home}/Library/Application Support`;
+      break;
+    }
+
+    case "windows":
+      return Deno.env.get("FOLDERID_RoamingAppData") ?? null;
+  }
+
+  return null;
 }
