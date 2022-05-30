@@ -7,7 +7,7 @@
  * | ------- | ---------------------------------------- | -------------------------------------------- |
  * | Linux   | `$XDG_DATA_HOME` or `$HOME`/.local/share | /home/justjavac/.local/share                 |
  * | macOS   | `$HOME`/Library/Application Support      | /Users/justjavac/Library/Application Support |
- * | Windows | `{FOLDERID_RoamingAppData}`              | C:\Users\justjavac\AppData\Roaming           |
+ * | Windows | `$APPDATA`                               | C:\Users\justjavac\AppData\Roaming           |
  */
 export default function dataDir(): string | null {
   switch (Deno.build.os) {
@@ -27,7 +27,7 @@ export default function dataDir(): string | null {
     }
 
     case "windows":
-      return Deno.env.get("FOLDERID_RoamingAppData") ?? null;
+      return Deno.env.get("APPDATA") ?? null;
   }
 
   return null;
