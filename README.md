@@ -15,7 +15,7 @@ containing a value from the following table, or `null`.
 | ------- | ---------------------------------------- | -------------------------------------------- |
 | Linux   | `$XDG_DATA_HOME` or `$HOME`/.local/share | /home/justjavac/.local/share                 |
 | macOS   | `$HOME`/Library/Application Support      | /Users/justjavac/Library/Application Support |
-| Windows | `{FOLDERID_RoamingAppData}`              | C:\Users\justjavac\AppData\Roaming           |
+| Windows | `$APPDATA`                               | C:\Users\justjavac\AppData\Roaming           |
 
 ## Usage
 
