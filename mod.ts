@@ -2,7 +2,7 @@
  *
  * The returned value depends on the operating system and is either a string,
  * containing a value from the following table, or `null`.
- * 
+ *
  * |Platform | Value                                    | Example                                      |
  * | ------- | ---------------------------------------- | -------------------------------------------- |
  * | Linux   | `$XDG_DATA_HOME` or `$HOME`/.local/share | /home/justjavac/.local/share                 |
